@@ -69,8 +69,9 @@ namespace G_Shop
             string email = textBox1.Text;
             string password = textBox2.Text;
 
-            // Simple email check (contains @ and .)
-            if (!email.Contains("@") || !email.Contains("."))
+            // Email validation with regex
+            string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
+            if (!Regex.IsMatch(email, emailPattern))
             {
                 MessageBox.Show("Enter valid email like user@gmail.com");
                 textBox1.Focus();
@@ -110,7 +111,7 @@ namespace G_Shop
 
         private void button2_MouseLeave(object sender, EventArgs e)
         {
-            button2.BackColor = Color.FromArgb(128, 70, 27);
+            button2.BackColor = Color.FromArgb(64, 64, 64);
             button2.ForeColor = Color.White;
         }
     }
