@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,28 +35,28 @@ namespace G_Shop
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            textBox2.PasswordChar = '*';
+            txtUserPassword.PasswordChar = '*';
         }
 
         private void panel5_Click(object sender, EventArgs e)
         {
-            if (textBox2.PasswordChar == '*')
+            if (txtUserPassword.PasswordChar == '*')
             {
-                textBox2.PasswordChar = '\0'; // Show password
+                txtUserPassword.PasswordChar = '\0'; // Show password
             }
             else
             {
-                textBox2.PasswordChar = '*'; // Hide password
+                txtUserPassword.PasswordChar = '*'; // Hide password
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "";      // Clear email textbox
+            txtUserEmail.Text = "";      // Clear email textbox
 
-            textBox2.Text = "";      // Clear password textbox
+            txtUserPassword.Text = "";      // Clear password textbox
 
-            textBox1.Focus();
+            txtUserEmail.Focus();
 
         }
 
@@ -66,22 +67,22 @@ namespace G_Shop
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string email = textBox1.Text;
-            string password = textBox2.Text;
+            string email = txtUserEmail.Text.Trim();
+            string password = txtUserPassword.Text;
 
             // Email validation with regex
             string emailPattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
             if (!Regex.IsMatch(email, emailPattern))
             {
                 MessageBox.Show("Enter valid email like user@gmail.com");
-                textBox1.Focus();
+                txtUserEmail.Focus();
                 return;
             }
             // Password checks
             if (password.Length < 5)
             {
                 MessageBox.Show("Password must be 5 or more characters");
-                textBox2.Focus();
+                txtUserPassword.Focus();
                 return;
             }
             // Check for special characters
@@ -89,30 +90,26 @@ namespace G_Shop
                   password.Contains("$") || password.Contains("&")))
             {
                 MessageBox.Show("Password needs @, #, $, or &");
-                textBox2.Focus();
+                txtUserPassword.Focus();
                 return;
             }
-
             // If everything is OK
             MessageBox.Show("Login Successful!");
 
         }
-
         private void label5_Click(object sender, EventArgs e)
         {
 
         }
-
         private void button2_MouseEnter(object sender, EventArgs e)
         {
-            button2.BackColor = Color.Red;
-            button2.ForeColor = Color.White;
+            btnClear.BackColor = Color.Red;
+            btnClear.ForeColor = Color.White;
         }
-
         private void button2_MouseLeave(object sender, EventArgs e)
         {
-            button2.BackColor = Color.FromArgb(64, 64, 64);
-            button2.ForeColor = Color.White;
+            btnClear.BackColor = Color.FromArgb(64, 64, 64);
+            btnClear.ForeColor = Color.White;
         }
     }
 }
